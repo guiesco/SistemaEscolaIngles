@@ -29,7 +29,7 @@ public class ControladorTurmas {
         return controladorTurmas;
     }
     
-    public ArrayList<Turmas> getTurmasProfessor(int cpf){
+    public ArrayList<Turmas> getTurmasProfessor(long cpf){
         ArrayList<Turmas> turmasSelec = new ArrayList<Turmas>(TurmaDAO.getInstancia().getList());
         return turmasSelec;
     }

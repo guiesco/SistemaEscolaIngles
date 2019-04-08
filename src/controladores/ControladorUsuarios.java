@@ -83,11 +83,12 @@ public class ControladorUsuarios {
     
     public void registraAluno(String nome, String rg, String cpf, String telefone, String endereco, String dataNasc, String senha) throws NaoNumericoException{
         try{
-            int rgI, cpfI, telefoneI;
-            rgI = Integer.parseInt(rg);
-            cpfI = Integer.parseInt(cpf);
-            telefoneI = Integer.parseInt(telefone);
-            Usuario novoAluno = cadastraAluno(cpfI, rgI, telefoneI, nome, dataNasc, endereco, senha);
+            long rgI,cpfI, telefoneI;
+            String cpf2;
+            rgI = Long.parseLong(rg);
+            cpfI = Long.parseLong(cpf.replaceAll("\\-|\\.", ""));
+            telefoneI = Integer.parseInt(telefone.replaceAll("\\-", ""));
+            Usuario novoAluno = cadastraAluno(12, 12, 12, nome, dataNasc, endereco, senha);
             if(novoAluno == null){
                 telaCadastroAluno.usuarioExistente();
             }else{

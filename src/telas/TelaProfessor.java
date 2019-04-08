@@ -132,17 +132,13 @@ public class TelaProfessor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        jTable1.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                JTable table = (JTable) mouseEvent.getSource();
-                Point point = mouseEvent.getPoint();
-                int row = table.rowAtPoint(point);
-                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    int idTurma = Integer.parseInt(modeloTurmas.getValueAt(row, 0).toString());
-                    ControladorTurmas.getInstance().showTurmaID(idTurma);
-                }
-            }
-        });
+        JTable table = (JTable) evt.getSource();
+        Point point = evt.getPoint();
+        int row = table.rowAtPoint(point);
+        if (evt.getClickCount() == 2 && table.getSelectedRow() != -1) {
+            int idTurma = Integer.parseInt(modeloTurmas.getValueAt(row, 0).toString());
+            ControladorTurmas.getInstance().showTurmaID(idTurma);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**

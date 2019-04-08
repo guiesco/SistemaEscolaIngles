@@ -78,7 +78,7 @@ public class UsuarioDAO {
     }
 
     public void put(Usuario Usuario){
-        cacheUsuarios.put(Usuario.getCPF(), Usuario);
+        cacheUsuarios.put(Usuario.getIdUsuario(), Usuario);
         persist();
     }
 

@@ -5,17 +5,20 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author guies
  */
-public class Usuario {
+public class Usuario implements Serializable {
     
-    private int CPF;
-    private int RG;
-    private int telefone;
+    private static int nextIdUser = 0;
+    private int idUsuario;
+    private long CPF;
+    private long RG;
+    private long telefone;
     private String nome;
     private String dataNasc;
     private String endereco;
@@ -24,7 +27,9 @@ public class Usuario {
     private ArrayList<Turmas> turmas;
     private TipoUsuario tipoUsuario;
 
-    public Usuario(int CPF, int RG, int telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario) {
+    public Usuario(long CPF, long RG, long telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario) {
+        this.idUsuario = this.nextIdUser;
+        this.nextIdUser++;
         this.CPF = CPF;
         this.RG = RG;
         this.telefone = telefone;
@@ -35,7 +40,9 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
     
-    public Usuario(int CPF, int RG, int telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario, ArrayList<String> linguasEnsinadas) {
+    public Usuario(long CPF, long RG, long telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario, ArrayList<String> linguasEnsinadas) {
+        this.idUsuario = this.nextIdUser;
+        this.nextIdUser++;
         this.CPF = CPF;
         this.RG = RG;
         this.telefone = telefone;
@@ -48,6 +55,8 @@ public class Usuario {
     }
     
     public Usuario(TipoUsuario tipoUsuario){
+        this.idUsuario = this.nextIdUser;
+        this.nextIdUser++;
         this.CPF = 000;
         this.RG = 000;
         this.telefone = 000;
@@ -56,12 +65,44 @@ public class Usuario {
         this.senha = "admin";
         this.tipoUsuario = tipoUsuario;
     }
+
+    public static int getNextIdUser() {
+        return nextIdUser;
+    }
+
+    public static void setNextIdUser(int nextIdUser) {
+        Usuario.nextIdUser = nextIdUser;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public ArrayList<String> getLinguasEnsinadas() {
+        return linguasEnsinadas;
+    }
+
+    public void setLinguasEnsinadas(ArrayList<String> linguasEnsinadas) {
+        this.linguasEnsinadas = linguasEnsinadas;
+    }
+
+    public ArrayList<Turmas> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(ArrayList<Turmas> turmas) {
+        this.turmas = turmas;
+    }
     
     public Usuario(){
         this.nome = "senhaerrada";
     }
 
-    public int getCPF() {
+    public long getCPF() {
         return CPF;
     }
 
@@ -69,7 +110,7 @@ public class Usuario {
         this.CPF = CPF;
     }
 
-    public int getRG() {
+    public long getRG() {
         return RG;
     }
 
@@ -77,7 +118,7 @@ public class Usuario {
         this.RG = RG;
     }
 
-    public int getTelefone() {
+    public long getTelefone() {
         return telefone;
     }
 
