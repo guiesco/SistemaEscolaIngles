@@ -53,27 +53,34 @@ public class TelaProfessor extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Turmas", "Lingua"
+                "ID Turma", "Lingua", "Nivel"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -87,6 +94,8 @@ public class TelaProfessor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jButton1.setText("Salvar");
@@ -180,10 +189,15 @@ public class TelaProfessor extends javax.swing.JFrame {
         this.modeloTurmas = new DefaultTableModel();
         modeloTurmas.addColumn("Turma");
         modeloTurmas.addColumn("Lingua");
+        modeloTurmas.addColumn("Nivel");
         for (Turmas turma : turmas) {
-            modeloTurmas.addRow(new Object[]{turma.getId(), turma.getLingua()});
+            modeloTurmas.addRow(new Object[]{turma.getId(), turma.getLingua().getNome(), turma.getNivel()});
         }
         jTable1.setModel(modeloTurmas);
+    }
+    
+    public void setNome(String nome){
+        jLabel2.setText(nome);
     }
 
 

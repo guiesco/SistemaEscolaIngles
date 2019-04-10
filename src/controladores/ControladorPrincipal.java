@@ -40,8 +40,7 @@ public class ControladorPrincipal {
 
     public void login(String cpf, String senha) throws NaoNumericoException {
         try {
-            int cpfInt = Integer.parseInt(cpf);
-            Usuario loginUser = ControladorUsuarios.getInstance().login(cpfInt, senha);
+            Usuario loginUser = ControladorUsuarios.getInstance().login(cpf, senha);
             if (loginUser != null) {
                 if (loginUser.getNome().equals("senhaerrada")) {
                     tela.senhaErrada();

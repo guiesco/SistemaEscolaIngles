@@ -57,7 +57,7 @@ public class ControladorUsuarios {
         }
     }
     
-    public Usuario cadastraAluno(int CPF, int RG, int telefone, String nome, String dataNasc, String endereco, String senha){
+    public Usuario cadastraAluno(String CPF, long RG, String telefone, String nome, String dataNasc, String endereco, String senha){
         if(existe(CPF) == null){
             Usuario novoAluno = new Usuario(CPF,RG,telefone, nome, dataNasc, endereco, senha, TipoUsuario.ALUNO);
             UsuarioDAO.getInstancia().put(novoAluno);
@@ -67,7 +67,7 @@ public class ControladorUsuarios {
         }
     }
     
-    public Usuario cadastraProfessor(int CPF, int RG, int telefone, String nome, String dataNasc, String endereco, String senha, ArrayList<String> linguasEnsinadas){
+    public Usuario cadastraProfessor(String CPF, long RG, String telefone, String nome, String dataNasc, String endereco, String senha, ArrayList<String> linguasEnsinadas){
         if(existe(CPF) == null){
             Usuario novoProfessor = new Usuario(CPF,RG,telefone, nome, dataNasc, endereco, senha, TipoUsuario.PROFESSOR, linguasEnsinadas);
             UsuarioDAO.getInstancia().put(novoProfessor);
@@ -83,12 +83,8 @@ public class ControladorUsuarios {
     
     public void registraAluno(String nome, String rg, String cpf, String telefone, String endereco, String dataNasc, String senha) throws NaoNumericoException{
         try{
-            long rgI,cpfI, telefoneI;
-            String cpf2;
-            rgI = Long.parseLong(rg);
-            cpfI = Long.parseLong(cpf.replaceAll("\\-|\\.", ""));
-            telefoneI = Integer.parseInt(telefone.replaceAll("\\-", ""));
-            Usuario novoAluno = cadastraAluno(12, 12, 12, nome, dataNasc, endereco, senha);
+            long rgI = Long.parseLong(rg);
+            Usuario novoAluno = cadastraAluno(cpf, rgI, telefone, nome, dataNasc, endereco, senha);
             if(novoAluno == null){
                 telaCadastroAluno.usuarioExistente();
             }else{
@@ -99,7 +95,7 @@ public class ControladorUsuarios {
         }
     }
     
-    public Usuario login(int cpf, String senha){
+    public Usuario login(String cpf, String senha){
         Usuario loginUser = existe(cpf);
         if (loginUser != null){
             if(loginUser.getSenha().equals(senha)){
@@ -111,9 +107,9 @@ public class ControladorUsuarios {
         return loginUser;
     }
     
-    public Usuario existe(int CPF){
+    public Usuario existe(String CPF){
         for(Usuario usuario : UsuarioDAO.getInstancia().getList()){
-            if(usuario.getCPF() == CPF){
+            if(usuario.getCPF().equals(CPF)){
                 return usuario;
             }
         }

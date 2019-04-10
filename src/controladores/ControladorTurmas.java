@@ -29,8 +29,13 @@ public class ControladorTurmas {
         return controladorTurmas;
     }
     
-    public ArrayList<Turmas> getTurmasProfessor(long cpf){
-        ArrayList<Turmas> turmasSelec = new ArrayList<Turmas>(TurmaDAO.getInstancia().getList());
+    public ArrayList<Turmas> getTurmasProfessor(String cpf){
+        ArrayList<Turmas> turmasSelec = new ArrayList<Turmas>();
+        for(Turmas turma : TurmaDAO.getInstancia().getList()){
+            if(turma.getProfessor().getCPF().equals(cpf)){
+                turmasSelec.add(turma);
+            }
+        }
         return turmasSelec;
     }
     

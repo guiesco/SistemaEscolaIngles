@@ -16,9 +16,9 @@ public class Usuario implements Serializable {
     
     private static int nextIdUser = 0;
     private int idUsuario;
-    private long CPF;
+    private String CPF;
     private long RG;
-    private long telefone;
+    private String telefone;
     private String nome;
     private String dataNasc;
     private String endereco;
@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
     private ArrayList<Turmas> turmas;
     private TipoUsuario tipoUsuario;
 
-    public Usuario(long CPF, long RG, long telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario) {
+    public Usuario(String CPF, long RG, String telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario) {
         this.idUsuario = this.nextIdUser;
         this.nextIdUser++;
         this.CPF = CPF;
@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
         this.tipoUsuario = tipoUsuario;
     }
     
-    public Usuario(long CPF, long RG, long telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario, ArrayList<String> linguasEnsinadas) {
+    public Usuario(String CPF, long RG, String telefone, String nome, String dataNasc, String endereco, String senha, TipoUsuario tipoUsuario, ArrayList<String> linguasEnsinadas) {
         this.idUsuario = this.nextIdUser;
         this.nextIdUser++;
         this.CPF = CPF;
@@ -57,9 +57,9 @@ public class Usuario implements Serializable {
     public Usuario(TipoUsuario tipoUsuario){
         this.idUsuario = this.nextIdUser;
         this.nextIdUser++;
-        this.CPF = 000;
+        this.CPF = "000";
         this.RG = 000;
-        this.telefone = 000;
+        this.telefone = "000";
         this.nome = "admin";
         this.dataNasc = "24/10/1999";
         this.senha = "admin";
@@ -102,11 +102,11 @@ public class Usuario implements Serializable {
         this.nome = "senhaerrada";
     }
 
-    public long getCPF() {
+    public String getCPF() {
         return CPF;
     }
 
-    public void setCPF(int CPF) {
+    public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 
@@ -118,11 +118,11 @@ public class Usuario implements Serializable {
         this.RG = RG;
     }
 
-    public long getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 

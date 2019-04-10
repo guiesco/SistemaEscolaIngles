@@ -11,5 +11,16 @@ package entidades;
  */
 public enum Lingua {
     
-    Ingles(),Espanhol(), Italiano(), Francês(), Alemao(), Chines()
+    Ingles("Ingles"),Espanhol("Espanhol"), Italiano("Italiano"), 
+    Francês("Francês"), Alemao("Alemão"), Chines("Chinês");
+    
+    private String nome;
+    
+    private Lingua(String nome){
+        this.nome = nome;
+    }
+    
+    public String getNome(){
+        return this.nome;
+    }
 }
