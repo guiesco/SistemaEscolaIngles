@@ -22,8 +22,8 @@ public class Turmas {
     private int diaSemana;
     private int horarioAula;
     private Usuario professor;
-    private ArrayList<Usuario> alunos;
-    private Map<String, Status> status;
+    private Map<Usuario, Status> alunosStatus;
+    private boolean ativa;
     
     
     public Turmas( Lingua lingua, int diaSemana, int horarioAula, Usuario professor, int nivel){
@@ -34,8 +34,12 @@ public class Turmas {
         this.horarioAula = horarioAula;
         this.professor = professor;
         this.nivel = nivel;
-        this.alunos = new ArrayList<Usuario>();
-        this.status = new HashMap<String, Status>();
+        this.alunosStatus = new HashMap<Usuario, Status>();
+        this.ativa = true;
+    }
+    
+    public void fechaTurma(){
+        this.ativa = false;
     }
     
     public static int getNextIdTurma() {
@@ -54,20 +58,12 @@ public class Turmas {
         this.nivel = nivel;
     }
 
-    public ArrayList<Usuario> getAlunos() {
-        return alunos;
+    public Map<Usuario, Status> getStatus() {
+        return alunosStatus;
     }
 
-    public void setAlunos(ArrayList<Usuario> alunos) {
-        this.alunos = alunos;
-    }
-
-    public Map<String, Status> getStatus() {
-        return status;
-    }
-
-    public void setStatus(Map<String, Status> status) {
-        this.status = status;
+    public void setStatus(Map<Usuario, Status> status) {
+        this.alunosStatus = status;
     }
 
     public int getId() {
@@ -109,15 +105,4 @@ public class Turmas {
     public void setProfessor(Usuario professor) {
         this.professor = professor;
     }
-
-    public ArrayList<Usuario> getAluno() {
-        return alunos;
-    }
-
-    public void setAluno(ArrayList<Usuario> Aluno) {
-        this.alunos = Aluno;
-    }
-    
-    
-    
 }

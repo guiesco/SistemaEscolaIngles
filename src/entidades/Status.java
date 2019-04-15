@@ -11,16 +11,16 @@ package entidades;
  */
 public enum Status {
     
-    AndApr("Andamento", "Aprovado"), AndRep("Andamento", "Reprovado"),
-    AndSemAv("Andamento", "Sem Avaliação"),
-    FinApr("Finalizado", "Aprovado"), FinRep("Finalizado", "Reprovado");
+    Apr("Aprovado"), Rep("Reprovado");
     
-    private String status;
     private String avaliacao;
     
-    private Status(String status, String avaliacao){
-        this.status = status;
+    private Status( String avaliacao){
         this.avaliacao = avaliacao;
+    }
+    
+    public String getAval(){
+        return this.avaliacao;
     }
     
 }

@@ -42,7 +42,7 @@ public class ControladorTurmas {
     public void showTurmaID(int turmaId){
         for(Turmas turma : TurmaDAO.getInstancia().getList()){
             if(turma.getId() == turmaId){
-                //telaTurma.showProf()
+                telaTurma.setTurmaProf(turma);
             }
         }
     }

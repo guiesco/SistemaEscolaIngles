@@ -6,9 +6,15 @@
 package telas;
 
 import controladores.ControladorTurmas;
+import controladores.ControladorUsuarios;
+import entidades.Status;
+import entidades.Turmas;
+import entidades.Usuario;
 import java.awt.Point;
+import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -17,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaTurma extends javax.swing.JFrame {
     
     private DefaultTableModel modeloAlunos;
+    private Turmas turma;
 
     /**
      * Creates new form TelaTurma
@@ -49,7 +56,7 @@ public class TelaTurma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Salvar");
+        jButton1.setText("Fechar Turma");
 
         jButton2.setText("Voltar");
 
@@ -74,14 +81,14 @@ public class TelaTurma extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID Turma", "Lingua", "Nivel"
+                "Aluno", "CPf", "Aprovado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -92,12 +99,11 @@ public class TelaTurma extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jLabel3.setText("Nivel:");
 
@@ -170,17 +176,28 @@ public class TelaTurma extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                     
         JTable table = (JTable) evt.getSource();
         Point point = evt.getPoint();
         int row = table.rowAtPoint(point);
-        if (evt.getClickCount() == 2 && table.getSelectedRow() != -1) {
-            int idTurma = Integer.parseInt(modeloAlunos.getValueAt(row, 0).toString());
-            ControladorTurmas.getInstance().showTurmaID(idTurma);
+        int column = table.columnAtPoint(point);
+        String CPF = String.valueOf(table.getModel().getValueAt(row, 1));
+        Usuario aluno = ControladorUsuarios.getInstance().existe(CPF);
+        if (table.getModel().getValueAt(row, column) == Boolean.valueOf(true) ) {
+            for (Map.Entry<Usuario, Status> chave : turma.getStatus().entrySet()) {
+                if(chave.getKey().equals(aluno)){
+                    chave.setValue(Status.Apr);
+                }
+            }
+        }else{
+            for (Map.Entry<Usuario, Status> chave : turma.getStatus().entrySet()) {
+                if(chave.getKey().equals(aluno)){
+                    chave.setValue(Status.Rep);
+                }
+            }
         }
-    }//GEN-LAST:event_jTable1MouseClicked
-
+    }   
     /**
      * @param args the command line arguments
      */
@@ -214,6 +231,19 @@ public class TelaTurma extends javax.swing.JFrame {
                 new TelaTurma().setVisible(true);
             }
         });
+    }
+    
+    public void setTurmaProf(Turmas turma){
+        this.turma = turma;
+        this.modeloAlunos = new DefaultTableModel();
+        modeloAlunos.addColumn("Aluno");
+        modeloAlunos.addColumn("CPF");
+        modeloAlunos.addColumn("Aprovado");
+        for (Map.Entry<Usuario, Status> chave : turma.getStatus().entrySet()) {
+            boolean isApr = chave.getValue() == Status.Apr;
+            modeloAlunos.addRow(new Object[]{chave.getKey().getNome(), chave.getKey().getCPF(), isApr});
+        }
+        jTable1.setModel(modeloAlunos);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

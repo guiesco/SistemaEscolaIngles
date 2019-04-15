@@ -5,6 +5,7 @@
  */
 package telas;
 
+import controladores.ControladorPrincipal;
 import controladores.ControladorUsuarios;
 import exception.NaoNumericoException;
 import javax.swing.JOptionPane;
@@ -72,6 +73,11 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
         });
 
         jButton2.setText("Voltar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         try {
             jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-####")));
@@ -176,6 +182,11 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, exception.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        ControladorPrincipal.getInstance().inicia();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
