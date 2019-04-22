@@ -57,7 +57,7 @@ public class Usuario implements Serializable {
     public Usuario(TipoUsuario tipoUsuario){
         this.idUsuario = this.nextIdUser;
         this.nextIdUser++;
-        this.CPF = "000";
+        this.CPF = "000.000.000-00";
         this.RG = 000;
         this.telefone = "000";
         this.nome = "admin";

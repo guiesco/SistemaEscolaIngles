@@ -185,6 +185,13 @@ public class TelaCadastroAluno extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
+        jPasswordField1.setText("");
+        jFormattedTextField1.setText("");
+        jFormattedTextField2.setText("");
+        jFormattedTextField3.setText("");
+        jTextField1.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
         ControladorPrincipal.getInstance().inicia();
     }//GEN-LAST:event_jButton2ActionPerformed
 

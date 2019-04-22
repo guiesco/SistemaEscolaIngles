@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 public class UsuarioDAO {
 
-    private final String filename = "Usuarios.dat";
+    private final String filename = "/home/100000000860332/Documentos/SistemaEscolaIngles/Usuarios.dat";
     private HashMap<Integer, Usuario> cacheUsuarios = new HashMap<>();
 
     private static UsuarioDAO UsuarioDAO;

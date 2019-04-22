@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaAluno extends javax.swing.JFrame {
 
     private DefaultTableModel modeloTurmas;
+
     /**
      * Creates new form TelaAluno
      */
@@ -191,8 +192,8 @@ public class TelaAluno extends javax.swing.JFrame {
             }
         });
     }
-    
-        public void setTurmas(ArrayList<Turmas> turmas) {
+
+    public void setTurmas(ArrayList<Turmas> turmas) {
         this.modeloTurmas = new DefaultTableModel();
         modeloTurmas.addColumn("Turma");
         modeloTurmas.addColumn("Lingua");
@@ -200,6 +201,11 @@ public class TelaAluno extends javax.swing.JFrame {
             modeloTurmas.addRow(new Object[]{turma.getId(), turma.getLingua()});
         }
         jTable1.setModel(modeloTurmas);
+    }
+
+
+    public void setNome(String nome) {
+        jLabel2.setText(nome);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

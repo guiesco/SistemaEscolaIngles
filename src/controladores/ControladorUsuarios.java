@@ -128,7 +128,16 @@ public class ControladorUsuarios {
     public void iniciaProfessor(Usuario user){
         this.usuarioLogado = user;
         ArrayList<Turmas> turmas = ControladorTurmas.getInstance().getTurmasProfessor(user.getCPF());
+        telaProfessor.setNome(user.getNome());
         telaProfessor.setTurmas(turmas);
         telaProfessor.setVisible(true);
+    }
+    
+    public void iniciaAluno(Usuario user){
+        this.usuarioLogado = user;
+        ArrayList<Turmas> turmas = ControladorTurmas.getInstance().getTurmasProfessor(user.getCPF());
+        telaAluno.setNome(user.getNome());
+        telaAluno.setTurmas(turmas);
+        telaAluno.setVisible(true);
     }
 }
